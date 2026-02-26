@@ -2,12 +2,15 @@
 using System.Windows.Input;
 using Voltstrap.UI.Elements.About;
 using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
 
 namespace Voltstrap.UI.ViewModels.Settings
 {
     public class MainWindowViewModel : NotifyPropertyChangedViewModel
     {
         public ICommand OpenAboutCommand => new RelayCommand(OpenAbout);
+
+        public ICommand SaveAndLaunchSettingsCommand => new RelayCommand(SaveAndLaunchSettings);
         
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings);
         
@@ -37,6 +40,38 @@ namespace Voltstrap.UI.ViewModels.Settings
         private void OpenAbout() => new MainWindow().ShowDialog();
 
         private void CloseWindow() => RequestCloseWindowEvent?.Invoke(this, EventArgs.Empty);
+
+        private void SaveAndLaunchSettings()
+        {
+            const string LOG_IDENT = "MainWindowViewModel::SaveAndLaunchSettings";
+
+            App.Settings.Save();
+            App.State.Save();
+            App.FastFlags.Save();
+
+            foreach (var pair in App.PendingSettingTasks)
+            {
+                var task = pair.Value;
+
+                if (task.Changed)
+                {
+                    App.Logger.WriteLine(LOG_IDENT, $"Executing pending task '{task}'");
+                    task.Execute();
+                }
+            }
+
+            App.PendingSettingTasks.Clear();
+
+            RequestSaveNoticeEvent?.Invoke(this, EventArgs.Empty);
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "roblox-player:1",
+                UseShellExecute = true
+            });
+
+            RequestCloseWindowEvent?.Invoke(this, EventArgs.Empty);
+        }
 
         private void SaveSettings()
         {

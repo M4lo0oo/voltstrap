@@ -753,6 +753,9 @@ Selecting 'No' will ignore this warning and continue installation.</value>
   <data name="Menu.MoreInfo" xml:space="preserve">
     <value>Click for more information on this option.</value>
   </data>
+  <data name="Menu.SaveAndLaunch" xml:space="preserve">
+    <value>Save and Launch Roblox</value>
+  </data>
   <data name="Menu.Save" xml:space="preserve">
     <value>Save</value>
   </data>

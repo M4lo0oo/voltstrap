@@ -81,8 +81,8 @@ namespace Voltstrap.UI.ViewModels.Settings
 
                 Directory.CreateDirectory(Path.GetDirectoryName(CustomCursorArrowPath)!);
 
-                ResizeAndSaveCursor(dialog.FileName, CustomCursorArrowPath, 64);
-                ResizeAndSaveCursor(dialog.FileName, CustomCursorFarPath, 64);
+                ResizeAndSaveCursor(dialog.FileName, CustomCursorArrowPath, 32);
+                ResizeAndSaveCursor(dialog.FileName, CustomCursorFarPath, 32);
             }
 
             OnPropertyChanged(nameof(ChooseCustomCursorVisibility));

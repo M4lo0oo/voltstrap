@@ -3500,6 +3500,15 @@ namespace Voltstrap.Resources {
                 return ResourceManager.GetString("Menu.MoreInfo", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Save and Launch Roblox.
+        /// </summary>
+        public static string Menu_SaveAndLaunch {
+            get {
+                return ResourceManager.GetString("Menu.SaveAndLaunch", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Save.
