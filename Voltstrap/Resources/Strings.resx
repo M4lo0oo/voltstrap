@@ -729,6 +729,12 @@ Selecting 'No' will ignore this warning and continue installation.</value>
   <data name="Menu.Mods.Presets.MouseCursor.Title" xml:space="preserve">
     <value>Mouse cursor</value>
   </data>
+  <data name="Menu.Mods.Presets.CustomMouseCursor.Description" xml:space="preserve">
+    <value>Import your own cursor.</value>
+  </data>
+  <data name="Menu.Mods.Presets.CustomMouseCursor.Title" xml:space="preserve">
+    <value>Custom Mouse cursor</value>
+  </data>
   <data name="Menu.Mods.Presets.OldAvatarEditor.Description" xml:space="preserve">
     <value>Bring back the old avatar editor background used in the Roblox app prior to 2020.</value>
   </data>

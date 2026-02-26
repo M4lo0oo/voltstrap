@@ -3431,6 +3431,21 @@ namespace Voltstrap.Resources {
                 return ResourceManager.GetString("Menu.Mods.Presets.MouseCursor.Title", resourceCulture);
             }
         }
+
+        public static string Menu_Mods_Presets_CustomMouseCursor_Description {
+            get {
+                return ResourceManager.GetString("Menu.Mods.Presets.CustomMouseCursor.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mouse cursor.
+        /// </summary>
+        public static string Menu_Mods_Presets_CustomMouseCursor_Title {
+            get {
+                return ResourceManager.GetString("Menu.Mods.Presets.CustomMouseCursor.Title", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Bring back the old avatar editor background used in the Roblox app prior to 2020..

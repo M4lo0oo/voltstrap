@@ -57,6 +57,64 @@ namespace Voltstrap.UI.ViewModels.Settings
             OnPropertyChanged(nameof(DeleteCustomFontVisibility));
         }
 
+        private string CustomCursorArrowPath => Path.Combine(Paths.Modifications, @"content\textures\Cursors\KeyboardMouse\ArrowCursor.png");
+        private string CustomCursorFarPath => Path.Combine(Paths.Modifications, @"content\textures\Cursors\KeyboardMouse\ArrowFarCursor.png");
+
+        private string CustomCursorPath => CustomCursorArrowPath;
+
+        private void ManageCustomCursor()
+        {
+            if (File.Exists(CustomCursorArrowPath))
+            {
+                File.Delete(CustomCursorArrowPath);
+                File.Delete(CustomCursorFarPath);
+            }
+            else
+            {
+                var dialog = new OpenFileDialog
+                {
+                    Filter = $"{Strings.Menu_IconFiles}|*.png;*.jpg;*.bmp"
+                };
+
+                if (dialog.ShowDialog() != true)
+                    return;
+
+                Directory.CreateDirectory(Path.GetDirectoryName(CustomCursorArrowPath)!);
+
+                ResizeAndSaveCursor(dialog.FileName, CustomCursorArrowPath, 64);
+                ResizeAndSaveCursor(dialog.FileName, CustomCursorFarPath, 64);
+            }
+
+            OnPropertyChanged(nameof(ChooseCustomCursorVisibility));
+            OnPropertyChanged(nameof(DeleteCustomCursorVisibility));
+        }
+
+        private void ResizeAndSaveCursor(string sourcePath, string destPath, int maxSize)
+        {
+            using var original = System.Drawing.Image.FromFile(sourcePath);
+
+            int width, height;
+
+            if (original.Width > original.Height)
+            {
+                width = maxSize;
+                height = (int)(original.Height * ((float)maxSize / original.Width));
+            }
+            else
+            {
+                height = maxSize;
+                width = (int)(original.Width * ((float)maxSize / original.Height));
+            }
+
+            using var resized = new System.Drawing.Bitmap(original, new System.Drawing.Size(width, height));
+            resized.Save(destPath, System.Drawing.Imaging.ImageFormat.Png);
+        }
+
+        public ICommand ManageCustomCursorCommand => new RelayCommand(ManageCustomCursor);
+
+        public Visibility ChooseCustomCursorVisibility => !File.Exists(CustomCursorPath) ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility DeleteCustomCursorVisibility => !File.Exists(CustomCursorPath) ? Visibility.Collapsed : Visibility.Visible;
+
         public ICommand OpenModsFolderCommand => new RelayCommand(OpenModsFolder);
 
         public Visibility ChooseCustomFontVisibility => !String.IsNullOrEmpty(TextFontTask.NewState) ? Visibility.Collapsed : Visibility.Visible;

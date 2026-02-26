@@ -63,6 +63,15 @@
         </controls:OptionControl>
 
         <controls:OptionControl 
+            Header="{x:Static resources:Strings.Menu_Mods_Presets_CustomMouseCursor_Title}" 
+            Description="{x:Static resources:Strings.Menu_Mods_Presets_CustomMouseCursor_Description}">
+            <StackPanel>
+                <ui:Button Icon="DocumentAdd16" Content="Choose Cursor" Command="{Binding ManageCustomCursorCommand}" Visibility="{Binding ChooseCustomCursorVisibility, Mode=OneWay}" />
+                <ui:Button Icon="Delete16" Content="Remove Cursor" Appearance="Danger" Command="{Binding ManageCustomCursorCommand}" Visibility="{Binding DeleteCustomCursorVisibility, Mode=OneWay}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl 
             Header="{x:Static resources:Strings.Menu_Mods_Presets_OldAvatarEditor_Title}" 
             Description="{x:Static resources:Strings.Menu_Mods_Presets_OldAvatarEditor_Description}">
             <ui:ToggleSwitch IsChecked="{Binding OldAvatarBackgroundTask.NewState, Mode=TwoWay}" />
